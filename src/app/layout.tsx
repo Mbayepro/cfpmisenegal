@@ -99,7 +99,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans antialiased bg-white text-slate-900 selection:bg-cfpmi-orange selection:text-white flex flex-col min-h-screen">
+      <body className="font-sans antialiased bg-[#080E21] text-slate-100 selection:bg-cfpmi-orange selection:text-white flex flex-col min-h-screen">
         <AlertBanner />
         <Navbar />
         <main className="flex-grow">{children}</main>

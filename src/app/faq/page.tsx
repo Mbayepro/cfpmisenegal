@@ -20,20 +20,25 @@ export default function FAQPage() {
       : INITIAL_FAQ.filter((f) => f.categorie === selectedCat);
 
   return (
-    <div className="bg-slate-50 min-h-screen py-12 sm:py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="bg-gradient-to-b from-[#080E21] via-[#0D183E] to-[#0A1128] text-white min-h-screen py-12 sm:py-20 relative overflow-hidden">
+      {/* Background glow orbs */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-80 bg-cfpmi-sky/15 rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-          <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-cfpmi-marine bg-blue-100/70 px-4 py-1.5 rounded-full">
-            <HelpCircle className="w-3.5 h-3.5 text-cfpmi-orange" />
-            Questions Fréquentes
-          </span>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+        <div className="text-center max-w-2xl mx-auto mb-12 space-y-3.5">
+          <div className="inline-flex items-center gap-2 bg-[#121E4A] border border-cfpmi-orange/40 px-4 py-1.5 rounded-full shadow-lg">
+            <Sparkles className="w-4 h-4 text-cfpmi-orange" />
+            <span className="text-xs font-bold uppercase tracking-wider text-cfpmi-orange">
+              Foire Aux Questions • CFPMI
+            </span>
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
             Tout Savoir sur le CFPMI
           </h1>
-          <p className="text-sm sm:text-base text-slate-600">
-            Frais d&apos;inscription, adresse exacte à Hamo 6, durée, reconnaissance des diplômes et stages.
+          <p className="text-sm sm:text-base text-slate-300">
+            Frais d&apos;inscription, adresse exacte à Hamo 6, durée, reconnaissance des diplômes et stages chantiers.
           </p>
         </div>
 
@@ -45,8 +50,8 @@ export default function FAQPage() {
               onClick={() => setSelectedCat(cat)}
               className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
                 selectedCat === cat
-                  ? "bg-cfpmi-marine text-white shadow-md"
-                  : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-100"
+                  ? "bg-gradient-to-r from-cfpmi-orange to-orange-600 text-white shadow-lg shadow-orange-500/30"
+                  : "bg-[#121E4A] text-slate-200 border border-blue-800/70 hover:bg-[#162762]"
               }`}
             >
               {cat}
@@ -61,24 +66,24 @@ export default function FAQPage() {
             return (
               <div
                 key={item.id}
-                className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs transition-all duration-200"
+                className="bg-[#121E4A] hover:bg-[#152354] rounded-2xl border border-blue-800/70 overflow-hidden shadow-xl transition-all duration-200"
               >
                 <button
                   onClick={() => setOpenId(isOpen ? null : item.id)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-slate-50/50 transition-colors"
+                  className="w-full p-5 text-left flex items-center justify-between gap-4 transition-colors"
                 >
-                  <span className="text-sm sm:text-base font-bold text-slate-900">
+                  <span className="text-sm sm:text-base font-bold text-white">
                     {item.question}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 ${
+                    className={`w-5 h-5 text-cfpmi-sky shrink-0 transition-transform duration-200 ${
                       isOpen ? "transform rotate-180 text-cfpmi-orange" : ""
                     }`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-blue-900/60 animate-in fade-in duration-150">
                     {item.reponse}
                   </div>
                 )}
@@ -87,12 +92,12 @@ export default function FAQPage() {
           })}
         </div>
 
-        {/* Still have questions banner */}
-        <div className="bg-gradient-to-r from-blue-900 to-cfpmi-marine text-white rounded-3xl p-8 text-center space-y-4 shadow-xl">
+        {/* Bottom Contact Help */}
+        <div className="bg-[#121E4A] border-2 border-cfpmi-orange/70 text-white rounded-3xl p-8 text-center space-y-4 shadow-2xl">
           <h3 className="text-xl font-bold">
             Vous avez une question spécifique ?
           </h3>
-          <p className="text-xs sm:text-sm text-slate-200 max-w-md mx-auto">
+          <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto">
             Notre équipe d&apos;accueil répond directement à vos interrogations par téléphone ou WhatsApp.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
@@ -100,7 +105,7 @@ export default function FAQPage() {
               href={generateWhatsAppLink("Bonjour CFPMI, j'ai une question avant de finaliser mon inscription.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs py-3.5 px-6 rounded-xl transition-all shadow"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs py-3.5 px-6 rounded-xl transition-all shadow-md"
             >
               <WhatsAppIcon className="w-4 h-4 fill-white" />
               <span>Poser ma question sur WhatsApp</span>
@@ -108,7 +113,7 @@ export default function FAQPage() {
 
             <a
               href={`tel:+${CFPMI_INFO.phonePrimaryClean}`}
-              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold text-xs py-3.5 px-6 rounded-xl transition-all border border-white/20"
+              className="inline-flex items-center gap-2 bg-[#162762] hover:bg-[#1C327A] text-white font-bold text-xs py-3.5 px-6 rounded-xl transition-all border border-blue-700/60 shadow-md"
             >
               <Phone className="w-4 h-4 text-cfpmi-sky" />
               <span>Appeler le {CFPMI_INFO.phonePrimary}</span>
@@ -120,4 +125,3 @@ export default function FAQPage() {
     </div>
   );
 }
-

@@ -116,11 +116,6 @@ export default function Footer() {
                   Actualités & vie du centre
                 </Link>
               </li>
-              <li className="pt-2">
-                <Link href="/admin" className="text-xs text-slate-500 hover:text-slate-400 underline">
-                  Espace Administration (Accès réservé)
-                </Link>
-              </li>
             </ul>
           </div>
 
