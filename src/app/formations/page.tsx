@@ -16,7 +16,6 @@ import {
   CheckCircle2,
   Calendar,
   Building2,
-  ShieldCheck,
 } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -35,9 +34,10 @@ function getFiliereConfig(slug: string) {
         icon: GraduationCap,
         badge: "Diplôme d'État • 3 ans",
         diplome: "Brevet de Technicien (BT)",
-        tagColor: "bg-amber-500/10 text-amber-700 border-amber-200",
-        iconBg: "bg-gradient-to-br from-blue-900 to-cfpmi-marine text-white",
+        tagColor: "bg-amber-500/20 text-amber-300 border-amber-400/40",
+        iconBg: "bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-orange-500/30",
         barGradient: "from-amber-500 via-cfpmi-orange to-cfpmi-marine",
+        cardBorder: "border-amber-500/30 hover:border-amber-400",
         highlight: "Cursus technique d'excellence après le BFEM",
       };
     case "froid-et-climatisation":
@@ -45,9 +45,10 @@ function getFiliereConfig(slug: string) {
         icon: Snowflake,
         badge: "Filière N°1 Emploi",
         diplome: "Certificat Pro (CPS 6 mois)",
-        tagColor: "bg-blue-500/10 text-cfpmi-marine border-blue-200",
-        iconBg: "bg-gradient-to-br from-cfpmi-sky to-cfpmi-marine text-white",
-        barGradient: "from-cfpmi-sky via-blue-700 to-cfpmi-marine",
+        tagColor: "bg-sky-500/20 text-sky-300 border-sky-400/40",
+        iconBg: "bg-gradient-to-br from-cfpmi-sky to-blue-700 text-white shadow-sky-500/30",
+        barGradient: "from-cfpmi-sky via-blue-500 to-cfpmi-marine",
+        cardBorder: "border-sky-500/30 hover:border-sky-400",
         highlight: "Bancs d'essais réels, montage et dépannage",
       };
     case "electricite-batiment-industrielle":
@@ -55,9 +56,10 @@ function getFiliereConfig(slug: string) {
         icon: Zap,
         badge: "Haute Employabilité",
         diplome: "Certificat Pro (CPS 6 mois)",
-        tagColor: "bg-orange-500/10 text-orange-800 border-orange-200",
-        iconBg: "bg-gradient-to-br from-amber-500 to-cfpmi-orange text-white",
+        tagColor: "bg-orange-500/20 text-orange-300 border-orange-400/40",
+        iconBg: "bg-gradient-to-br from-cfpmi-orange to-red-600 text-white shadow-orange-500/30",
         barGradient: "from-cfpmi-orange via-amber-500 to-cfpmi-marine",
+        cardBorder: "border-orange-500/30 hover:border-orange-400",
         highlight: "Câblage armoires industrielles & solaire",
       };
     case "plomberie-sanitaire":
@@ -65,9 +67,10 @@ function getFiliereConfig(slug: string) {
         icon: Wrench,
         badge: "Métier Rentable & Indépendant",
         diplome: "Certificat Pro (CPS 6 mois)",
-        tagColor: "bg-emerald-500/10 text-emerald-800 border-emerald-200",
-        iconBg: "bg-gradient-to-br from-teal-500 to-emerald-700 text-white",
+        tagColor: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
+        iconBg: "bg-gradient-to-br from-teal-500 to-emerald-700 text-white shadow-emerald-500/30",
         barGradient: "from-emerald-500 via-teal-600 to-cfpmi-sky",
+        cardBorder: "border-emerald-500/30 hover:border-emerald-400",
         highlight: "Réseaux sanitaires, tuyauterie moderne & chantiers",
       };
     case "soudure-metallique":
@@ -75,9 +78,10 @@ function getFiliereConfig(slug: string) {
         icon: Flame,
         badge: "Précision Industrielle",
         diplome: "Certificat Pro (CPS 6 mois)",
-        tagColor: "bg-rose-500/10 text-rose-800 border-rose-200",
-        iconBg: "bg-gradient-to-br from-cfpmi-red to-orange-700 text-white",
+        tagColor: "bg-rose-500/20 text-rose-300 border-rose-400/40",
+        iconBg: "bg-gradient-to-br from-cfpmi-red to-orange-700 text-white shadow-red-500/30",
         barGradient: "from-cfpmi-red via-orange-600 to-cfpmi-orange",
+        cardBorder: "border-rose-500/30 hover:border-rose-400",
         highlight: "Procédés ARC (MMA), TIG inox & charpente",
       };
     default:
@@ -85,9 +89,10 @@ function getFiliereConfig(slug: string) {
         icon: Briefcase,
         badge: "Formation Continue Sur Mesure",
         diplome: "Attestation de Perfectionnement",
-        tagColor: "bg-purple-500/10 text-purple-800 border-purple-200",
-        iconBg: "bg-gradient-to-br from-indigo-600 to-purple-800 text-white",
+        tagColor: "bg-purple-500/20 text-purple-300 border-purple-400/40",
+        iconBg: "bg-gradient-to-br from-indigo-600 to-purple-800 text-white shadow-purple-500/30",
         barGradient: "from-purple-600 via-indigo-600 to-cfpmi-sky",
+        cardBorder: "border-purple-500/30 hover:border-purple-400",
         highlight: "Modules sur demande pour professionnels & entreprises",
       };
   }
@@ -97,34 +102,35 @@ export default async function FormationsPage() {
   const filieres = await getFilieres();
 
   return (
-    <div className="bg-gradient-to-b from-slate-50 via-white to-slate-50 min-h-screen py-12 sm:py-20 relative overflow-hidden">
-      {/* Background soft blurs */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-72 bg-blue-100/50 rounded-full blur-3xl pointer-events-none" />
+    <div className="bg-gradient-to-b from-[#080E21] via-[#0D183E] to-[#0A1128] text-white min-h-screen py-12 sm:py-20 relative overflow-hidden">
+      {/* Background glow orbs */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-80 bg-cfpmi-sky/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-cfpmi-orange/15 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3.5">
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-50 to-orange-50 border border-slate-200 px-4 py-1.5 rounded-full shadow-xs">
+          <div className="inline-flex items-center gap-2 bg-[#121E4A] border border-cfpmi-orange/40 px-4 py-1.5 rounded-full shadow-lg">
             <Sparkles className="w-4 h-4 text-cfpmi-orange" />
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-800">
+            <span className="text-xs font-bold uppercase tracking-wider text-cfpmi-orange">
               Catalogue Officiel 2026 - 2027 • Rentrée Lundi 17 Novembre 2026
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
             Formations Professionnelles & Certifiantes
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            Toutes nos filières sont dispensées en ateliers 100% équipés à <strong>Guédiawaye Hamo 6</strong> avec des stages garantis sur le terrain avec nos partenaires (<span className="text-cfpmi-marine font-semibold">CALD Expertise</span>).
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto">
+            Toutes nos filières sont dispensées en ateliers 100% équipés à <strong>Guédiawaye Hamo 6</strong> avec des stages garantis sur le terrain avec nos partenaires (<span className="text-cfpmi-sky font-semibold">CALD Expertise</span>).
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
             {["CPS (6 mois)", "CAP", "BEP", "BT (3 ans)", "BTS"].map((diploma) => (
               <span
                 key={diploma}
-                className="bg-white border border-slate-200 text-cfpmi-marine font-semibold text-xs px-3.5 py-1 rounded-full shadow-xs"
+                className="bg-[#121E4A] border border-blue-700/60 text-cfpmi-sky font-semibold text-xs px-3.5 py-1 rounded-full shadow-xs"
               >
                 🎓 {diploma}
               </span>
@@ -141,7 +147,7 @@ export default async function FormationsPage() {
             return (
               <div
                 key={filiere.id}
-                className="bg-white rounded-3xl border border-slate-200/90 shadow-md hover:shadow-2xl hover:border-cfpmi-sky/60 transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1 relative"
+                className={`bg-[#121E4A] rounded-3xl border ${config.cardBorder} shadow-2xl shadow-black/40 hover:shadow-blue-900/30 transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1 relative`}
               >
                 {/* Top dynamic gradient line */}
                 <div className={`h-2.5 w-full bg-gradient-to-r ${config.barGradient}`} />
@@ -158,15 +164,15 @@ export default async function FormationsPage() {
                         <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full border shadow-xs ${config.tagColor}`}>
                           {config.badge}
                         </span>
-                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-300 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/40">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                           Rentrée 17 Nov. 2026
                         </span>
                       </div>
                     </div>
 
                     {/* Title & Subtitle */}
-                    <h2 className="text-2xl font-bold text-slate-900 group-hover:text-cfpmi-marine transition-colors line-clamp-2 leading-snug">
+                    <h2 className="text-2xl font-bold text-white group-hover:text-cfpmi-sky transition-colors line-clamp-2 leading-snug">
                       {filiere.titre}
                     </h2>
                     {filiere.sous_titre && (
@@ -176,35 +182,35 @@ export default async function FormationsPage() {
                     )}
 
                     {/* Highlight Box */}
-                    <div className="mt-3.5 bg-slate-50 border border-slate-100 rounded-xl p-2.5 text-xs text-slate-700 font-medium flex items-start gap-2">
+                    <div className="mt-3.5 bg-[#0E1738] border border-blue-900/70 rounded-xl p-2.5 text-xs text-slate-200 font-medium flex items-start gap-2">
                       <Sparkles className="w-4 h-4 text-cfpmi-orange shrink-0 mt-0.5" />
                       <span>{config.highlight}</span>
                     </div>
 
                     {/* Short Description */}
-                    <p className="text-xs sm:text-sm text-slate-600 mt-3 line-clamp-3 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-300 mt-3 line-clamp-3 leading-relaxed">
                       {filiere.description_courte}
                     </p>
 
                     {/* Practical Info Grid */}
-                    <div className="mt-5 space-y-2 border-t border-slate-100 pt-4 text-xs">
-                      <div className="flex items-center gap-2 text-slate-800 font-semibold">
+                    <div className="mt-5 space-y-2 border-t border-blue-900/60 pt-4 text-xs">
+                      <div className="flex items-center gap-2 text-slate-200 font-semibold">
                         <Clock className="w-4 h-4 text-cfpmi-sky shrink-0" />
                         <span><strong>Durée :</strong> {filiere.duree}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-slate-600">
+                      <div className="flex items-center gap-2 text-slate-300">
                         <Calendar className="w-4 h-4 text-cfpmi-orange shrink-0" />
                         <span><strong>Créneaux :</strong> {filiere.horaires}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-slate-600">
-                        <Building2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <div className="flex items-center gap-2 text-slate-300">
+                        <Building2 className="w-4 h-4 text-emerald-400 shrink-0" />
                         <span><strong>Immersion :</strong> Stage terrain garanti (CALD Expertise)</span>
                       </div>
                     </div>
 
                     {/* Débouchés clés au Sénégal */}
                     {filiere.debouches && filiere.debouches.length > 0 && (
-                      <div className="mt-4 pt-3 border-t border-slate-100">
+                      <div className="mt-4 pt-3 border-t border-blue-900/60">
                         <span className="text-[10px] uppercase font-bold text-slate-400 block mb-2 tracking-wider">
                           Débouchés clés au Sénégal :
                         </span>
@@ -212,9 +218,9 @@ export default async function FormationsPage() {
                           {filiere.debouches.slice(0, 3).map((job, idx) => (
                             <span
                               key={idx}
-                              className="text-[11px] font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1"
+                              className="text-[11px] font-medium text-slate-200 bg-[#0E1738] hover:bg-[#152254] border border-blue-800/60 px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1"
                             >
-                              <CheckCircle2 className="w-3 h-3 text-emerald-500 shrink-0" />
+                              <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
                               <span className="truncate max-w-[180px]">{job}</span>
                             </span>
                           ))}
@@ -224,15 +230,15 @@ export default async function FormationsPage() {
                   </div>
 
                   {/* Pricing row + CTAs */}
-                  <div className="mt-6 pt-5 border-t border-slate-100 space-y-3">
+                  <div className="mt-6 pt-5 border-t border-blue-900/60 space-y-3">
                     
                     {/* Tarifs sur demande bar */}
-                    <div className="bg-gradient-to-r from-blue-50/70 to-slate-50 border border-slate-200/80 rounded-2xl p-3 flex items-center justify-between gap-2 shadow-xs">
+                    <div className="bg-[#0B1330] border border-blue-800/80 rounded-2xl p-3 flex items-center justify-between gap-2 shadow-xs">
                       <div>
-                        <span className="text-[10px] text-slate-500 uppercase font-bold block tracking-wider">
+                        <span className="text-[10px] text-slate-400 uppercase font-bold block tracking-wider">
                           Tarifs & Modalités
                         </span>
-                        <span className="text-xs font-bold text-cfpmi-marine">
+                        <span className="text-xs font-bold text-cfpmi-sky">
                           Sur demande au secrétariat
                         </span>
                       </div>
@@ -255,7 +261,7 @@ export default async function FormationsPage() {
                     <div className="grid grid-cols-2 gap-2.5 pt-1">
                       <Link
                         href={`/formations/${filiere.slug}`}
-                        className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 hover:text-slate-900 py-3 px-3 rounded-xl transition-all text-center group/btn"
+                        className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-200 bg-[#162762] hover:bg-[#1C327A] hover:text-white py-3 px-3 rounded-xl border border-blue-700/60 transition-all text-center group/btn"
                       >
                         <span>Programme</span>
                         <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
@@ -263,7 +269,7 @@ export default async function FormationsPage() {
 
                       <Link
                         href={`/inscription?filiere=${filiere.slug}`}
-                        className="inline-flex items-center justify-center gap-1.5 text-xs font-extrabold text-white bg-gradient-to-r from-cfpmi-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 py-3 px-3 rounded-xl transition-all text-center shadow-md hover:shadow-lg shadow-orange-500/20"
+                        className="inline-flex items-center justify-center gap-1.5 text-xs font-extrabold text-white bg-gradient-to-r from-cfpmi-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 py-3 px-3 rounded-xl transition-all text-center shadow-lg shadow-orange-500/25"
                       >
                         <GraduationCap className="w-4 h-4" />
                         <span>S&apos;inscrire</span>
@@ -279,12 +285,12 @@ export default async function FormationsPage() {
         </div>
 
         {/* Bottom banner for personalized guidance */}
-        <div className="mt-16 bg-gradient-to-r from-blue-900 via-cfpmi-marine to-blue-950 text-white rounded-3xl p-8 sm:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-16 bg-gradient-to-r from-[#121E4A] via-[#162762] to-[#121E4A] border border-blue-700/60 text-white rounded-3xl p-8 sm:p-10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left max-w-xl">
-            <span className="text-xs font-bold uppercase tracking-wider text-cfpmi-orange bg-white/10 px-3 py-1 rounded-full">
+            <span className="text-xs font-bold uppercase tracking-wider text-cfpmi-orange bg-orange-500/20 border border-orange-500/40 px-3 py-1 rounded-full">
               Orientation Gratuite
             </span>
-            <h3 className="text-2xl font-extrabold">
+            <h3 className="text-2xl font-extrabold text-white">
               Vous hésitez entre plusieurs filières ?
             </h3>
             <p className="text-xs sm:text-sm text-slate-300">
@@ -305,7 +311,7 @@ export default async function FormationsPage() {
 
             <Link
               href="/inscription"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-cfpmi-orange hover:bg-orange-600 text-white font-bold text-xs sm:text-sm py-3.5 px-6 rounded-xl shadow-md transition-all whitespace-nowrap"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-cfpmi-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-xs sm:text-sm py-3.5 px-6 rounded-xl shadow-lg shadow-orange-500/25 transition-all whitespace-nowrap"
             >
               <GraduationCap className="w-4 h-4" />
               <span>S&apos;inscrire en ligne</span>

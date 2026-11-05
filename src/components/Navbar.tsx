@@ -19,33 +19,35 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
+    <header className="sticky top-0 z-40 bg-[#080E21]/95 backdrop-blur-md border-b border-blue-900/60 shadow-lg shadow-black/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Logo & Slogan (Location text removed as requested) */}
+          {/* Logo with White Pill Container for perfect contrast */}
           <Link href="/" className="flex items-center group">
-            <div className="relative w-40 sm:w-48 h-12 flex items-center">
-              <Image
-                src="/images/logo.png"
-                alt="CFPMI Sénégal - Clé de la Réussite"
-                fill
-                priority
-                className="object-contain object-left group-hover:scale-[1.02] transition-transform duration-200"
-              />
+            <div className="bg-white/95 hover:bg-white px-3 py-1.5 rounded-2xl shadow-md border border-white/20 transition-all duration-200 group-hover:scale-105">
+              <div className="relative w-36 sm:w-44 h-11 flex items-center">
+                <Image
+                  src="/images/logo.png"
+                  alt="CFPMI Sénégal - Clé de la Réussite"
+                  fill
+                  priority
+                  className="object-contain object-left"
+                />
+              </div>
             </div>
           </Link>
 
-          {/* Desktop Navigation (Without Tarifs, Without FAQ) */}
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
             {NAVIGATION_LINKS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 ${
+                className={`px-3 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
                   isActive(item.href)
-                    ? "text-cfpmi-marine bg-blue-50/80 font-bold"
-                    : "text-slate-700 hover:text-cfpmi-marine hover:bg-slate-50"
+                    ? "text-cfpmi-orange bg-orange-500/10 border border-orange-500/30 shadow-xs"
+                    : "text-slate-200 hover:text-white hover:bg-white/5"
                 }`}
               >
                 {item.name}
@@ -53,13 +55,13 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Right Action CTAs */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Action CTAs */}
+          <div className="hidden sm:flex items-center space-x-3">
             <a
-              href={generateWhatsAppLink()}
+              href={generateWhatsAppLink("Bonjour CFPMI, je souhaite me renseigner sur vos formations.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs font-bold text-white bg-[#25D366] hover:bg-[#20ba59] px-4 py-2.5 rounded-full shadow-sm hover:shadow transition-all duration-200 transform hover:scale-105"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-md transition-all duration-200 transform hover:scale-105"
             >
               <WhatsAppIcon className="w-4 h-4 fill-white" />
               <span>WhatsApp</span>
@@ -67,78 +69,64 @@ export default function Navbar() {
 
             <Link
               href="/inscription"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-cfpmi-marine to-blue-800 text-white font-bold text-sm px-4 py-2.5 rounded-full shadow-md hover:shadow-lg hover:from-blue-900 hover:to-cfpmi-marine transition-all duration-200 transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-cfpmi-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs font-extrabold px-4 py-2.5 rounded-xl shadow-md shadow-orange-500/20 transition-all duration-200 transform hover:scale-105"
             >
-              <GraduationCap className="w-4 h-4 text-cfpmi-orange" />
+              <GraduationCap className="w-4 h-4" />
               <span>S&apos;inscrire</span>
             </Link>
           </div>
 
-          {/* Mobile hamburger & WhatsApp button */}
-          <div className="flex items-center gap-2 lg:hidden">
+          {/* Mobile menu button */}
+          <div className="flex lg:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+              aria-label="Menu"
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu dropdown */}
+      {isOpen && (
+        <div className="lg:hidden bg-[#0B1437] border-b border-blue-900/80 px-4 pt-3 pb-6 space-y-2 animate-in slide-in-from-top-4 duration-200">
+          {NAVIGATION_LINKS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setIsOpen(false)}
+              className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold ${
+                isActive(item.href)
+                  ? "bg-orange-500/10 text-cfpmi-orange border border-orange-500/30"
+                  : "text-slate-200 hover:bg-white/5"
+              }`}
+            >
+              <span>{item.name}</span>
+              <ChevronRight className="w-4 h-4 text-slate-500" />
+            </Link>
+          ))}
+
+          <div className="pt-4 border-t border-slate-800 space-y-2">
             <a
               href={generateWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Contacter sur WhatsApp"
-              className="p-2.5 text-white bg-[#25D366] hover:bg-[#20ba59] rounded-full shadow-xs transition-colors"
+              className="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold text-sm py-3 rounded-xl shadow"
             >
               <WhatsAppIcon className="w-4 h-4 fill-white" />
+              <span>WhatsApp Direct (+221 77 694 78 71)</span>
             </a>
 
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              type="button"
-              className="inline-flex items-center justify-center p-2 rounded-lg text-slate-700 hover:text-cfpmi-marine hover:bg-slate-100 focus:outline-none"
-              aria-controls="mobile-menu"
-              aria-expanded={isOpen}
-            >
-              <span className="sr-only">Ouvrir le menu</span>
-              {isOpen ? <X className="w-6 h-6 text-cfpmi-red" /> : <Menu className="w-6 h-6 text-cfpmi-marine" />}
-            </button>
-          </div>
-
-        </div>
-      </div>
-
-      {/* Mobile Drawer Menu */}
-      {isOpen && (
-        <div className="lg:hidden border-t border-slate-100 bg-white shadow-xl px-4 pt-3 pb-6 space-y-3 animate-in slide-in-from-top-2 duration-200">
-          <div className="grid grid-cols-1 gap-1">
-            {NAVIGATION_LINKS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
-                  isActive(item.href)
-                    ? "bg-blue-50 text-cfpmi-marine font-bold"
-                    : "text-slate-800 hover:bg-slate-50"
-                }`}
-              >
-                <span>{item.name}</span>
-                <ChevronRight className="w-4 h-4 text-slate-400" />
-              </Link>
-            ))}
-          </div>
-
-          <div className="pt-3 border-t border-slate-100 flex flex-col gap-2.5">
             <Link
               href="/inscription"
               onClick={() => setIsOpen(false)}
-              className="w-full flex items-center justify-center gap-2 bg-cfpmi-orange hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-colors text-center text-sm"
+              className="w-full flex items-center justify-center gap-2 bg-cfpmi-orange text-white font-bold text-sm py-3 rounded-xl shadow"
             >
-              <GraduationCap className="w-5 h-5" />
-              <span>Formulaire d&apos;inscription en ligne</span>
+              <GraduationCap className="w-4 h-4" />
+              <span>S&apos;inscrire en ligne</span>
             </Link>
-
-            <a
-              href={`tel:+${CFPMI_INFO.phonePrimaryClean}`}
-              className="w-full flex items-center justify-center gap-2 bg-slate-100 text-cfpmi-marine font-semibold py-2.5 px-4 rounded-xl text-center text-sm"
-            >
-              <Phone className="w-4 h-4 text-cfpmi-sky" />
-              <span>Appeler le secrétariat ({CFPMI_INFO.phonePrimary})</span>
-            </a>
           </div>
         </div>
       )}
