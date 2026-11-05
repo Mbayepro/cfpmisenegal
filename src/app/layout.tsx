@@ -40,7 +40,8 @@ export const metadata: Metadata = {
     siteName: "CFPMI Sénégal",
     images: [
       {
-        url: "/images/og-image.png",
+        url: `${CFPMI_INFO.siteUrl}/images/og-image.png`,
+        secureUrl: `${CFPMI_INFO.siteUrl}/images/og-image.png`,
         width: 1200,
         height: 630,
         alt: "CFPMI Sénégal - Centre de Formation Professionnelle aux Métiers de l'Industrie",
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     title: "CFPMI Sénégal - Clé de la Réussite",
     description:
       "Formations 100% pratiques en Froid & Climatisation, Électricité, Plomberie et Soudure à Guédiawaye Hamo 6, Dakar. Rentrée 17 novembre 2026.",
-    images: ["/images/og-image.png"],
+    images: [`${CFPMI_INFO.siteUrl}/images/og-image.png`],
   },
   robots: {
     index: true,

@@ -11,7 +11,13 @@ export const CFPMI_INFO = {
   whatsappClean: "221776947871",
   email: "cfpmidakar@gmail.com",
   facebook: "https://facebook.com/cfpmisenegal",
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://cfpmi-senegal.vercel.app",
+  siteUrl:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "https://cfpmisenegal.vercel.app"),
   colors: {
     marine: "#1B2A7B",
     sky: "#2AA0E0",
