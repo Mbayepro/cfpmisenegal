@@ -12,12 +12,12 @@ export const CFPMI_INFO = {
   email: "cfpmidakar@gmail.com",
   facebook: "https://facebook.com/cfpmisenegal",
   siteUrl:
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    process.env.NEXT_PUBLIC_SITE_URL &&
+    !process.env.NEXT_PUBLIC_SITE_URL.includes("localhost")
+      ? process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")
+      : process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "https://cfpmisenegal.vercel.app"),
+      : "https://cfpmisenegal.vercel.app",
   colors: {
     marine: "#1B2A7B",
     sky: "#2AA0E0",
